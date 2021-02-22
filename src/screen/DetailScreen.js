@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
+import { ScrollView,View, Text, StyleSheet, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -10,23 +11,47 @@ const DetailScreen = ({ route: { params } }) => {
 
 
     return(
-        <ScrollView style={styles.container}>
-            <Text style={styles.sourceStyle}>{item.source.name}</Text>
-            <Text style={styles.titleStyle}>{item.title}</Text>
-            <Text style={styles.descriptionStyle}>{item.description}</Text>
-            <Image style={styles.imageStyle} source={item.urlToImage==null ? require('../../assets/icon.png') : {uri: item.urlToImage}}/>
-            {item.author ? <Text style={styles.descriptionStyle}>By {item.author}</Text> : null}
-            <TouchableOpacity onPress={() =>  Linking.openURL(item.url)}><Text style={styles.url} >{item.url}</Text></TouchableOpacity>
-            <Text style={styles.contentStyle}>{item.content}</Text>
-        </ScrollView>
+        <View style={styles.container}>
+            <ScrollView>
+                <Text style={styles.sourceStyle}>{item.source.name}</Text>
+                <Text style={styles.titleStyle}>{item.title}</Text>
+                <Text style={styles.descriptionStyle}>{item.description}</Text>
+                <Image style={styles.imageStyle} source={item.urlToImage==null ? require('../../assets/icon.png') : {uri: item.urlToImage}}/>
+                {item.author ? <Text style={styles.descriptionStyle}>By {item.author}</Text> : null}
+                <TouchableOpacity onPress={() =>  Linking.openURL(item.url)}><Text style={styles.url} >{item.url}</Text></TouchableOpacity>
+                <Text style={styles.contentStyle}>{item.content}</Text>
+            </ScrollView>
+            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle}>
+                <Ionicons name='heart-outline' size={35} />
+            </TouchableOpacity>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
+        paddingHorizontal: 10,
+        marginTop: 10,
         backgroundColor: '#fff',
         flex:1 
+    },
+    floatingStyle:{
+        alignItems:'center',
+        justifyContent:'center',
+        width:65,
+        position: 'absolute',                                          
+        bottom: 25,                                                    
+        right: 15,
+        height:65,
+        backgroundColor:'#FFF',
+        borderRadius:100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.5,
+        elevation: 5,
     },
     imageStyle: {
         width: screenWidth-20,

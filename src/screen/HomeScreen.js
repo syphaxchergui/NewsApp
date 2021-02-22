@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import SearchBar from "../components/SearchBar";
 import NewsDetail from '../components/NewsDetail';
 import newsApi from "../api/newsApi";
@@ -25,6 +25,7 @@ const HomeScreen = ({ navigation }) => {
 
     const searchApiWithTerm = async (term) => {
         try{
+            setLoaded(false)
             const response = await newsApi.get(`./everything?q=${term}&apiKey=9ad9ee5b59854fdcac03e4564bb937e2`)
             setResults(response.data.articles);
             setLoaded(true)
@@ -54,11 +55,18 @@ const HomeScreen = ({ navigation }) => {
                     }}
                 /> 
 
-            : null}
+            : <Image source={require('../../assets/loading.gif')} style={styles.imageLoading} />}
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    imageLoading:{
+        marginTop: 10,
+        alignSelf: 'center',
+        width: 70,
+        height: 50
+    }
+})
 
 export default HomeScreen;
