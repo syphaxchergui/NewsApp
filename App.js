@@ -7,6 +7,7 @@ import DetailScreen from './src/screen/DetailScreen';
 import FavoriteListScreen from './src/screen/FavoriteListScreen'; 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CategorieScreen from './src/screen/CategorieScreen'
+import { FavoriteListContext, FavoriteListProvider } from './src/context/FavoriteListProvider'
 
 const Stack = createStackNavigator();
 
@@ -39,7 +40,7 @@ function CategorieScreenStack() {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -83,4 +84,10 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
+}
+
+export default () => {
+  return <FavoriteListProvider>
+      <App />
+  </FavoriteListProvider>
 }

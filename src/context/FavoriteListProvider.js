@@ -1,11 +1,20 @@
 import React from 'react';
+import { useState } from 'react';
 
 export const FavoriteListContext = React.createContext();
 
-const FavoriteListProvider = props => {
+export const FavoriteListProvider = props => {
+  const [favList, setFavList] = useState([])
+  let temp = []
+
+  const addFavList = (item) => {
+    temp = [...temp, item]
+    setFavList(temp)
+  }
 
   const contextValue={
-      
+      favList,
+      addFavList
   }
 
   return (

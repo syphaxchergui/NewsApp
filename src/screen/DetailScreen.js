@@ -1,13 +1,15 @@
 import React from 'react';
 import { ScrollView,View, Text, StyleSheet, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { FavoriteListContext } from '../context/FavoriteListProvider'
+import { useContext } from 'react';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 const DetailScreen = ({ route: { params } }) => {
 
+    const { addFavList } = useContext(FavoriteListContext);
     const { item } =  params;
-    console.log(item) 
 
 
     return(
@@ -21,7 +23,7 @@ const DetailScreen = ({ route: { params } }) => {
                 <TouchableOpacity onPress={() =>  Linking.openURL(item.url)}><Text style={styles.url} >{item.url}</Text></TouchableOpacity>
                 <Text style={styles.contentStyle}>{item.content}</Text>
             </ScrollView>
-            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle}>
+            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle} onPress={() => {addFavList(item)}}>
                 <Ionicons name='heart-outline' size={35} />
             </TouchableOpacity>
         </View>
@@ -31,7 +33,7 @@ const DetailScreen = ({ route: { params } }) => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
-        marginTop: 10,
+        paddingTop: 10,
         backgroundColor: '#fff',
         flex:1 
     },
