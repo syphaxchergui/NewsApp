@@ -8,9 +8,24 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 const DetailScreen = ({ route: { params } }) => {
 
-    const { addFavList } = useContext(FavoriteListContext);
+    const { favList, addFavList, deleteFavList } = useContext(FavoriteListContext);
     const { item } =  params;
+    var name;
+    var toast;
 
+    const liked = () => {
+        name='heart';
+        toast='Article unliked !'
+    }
+
+    const unliked = () => {
+        name='heart-outline';
+        toast='Article liked'
+    }
+
+    {favList.includes(item) ? liked() : unliked()}
+
+    
 
     return(
         <View style={styles.container}>
@@ -23,8 +38,8 @@ const DetailScreen = ({ route: { params } }) => {
                 <TouchableOpacity onPress={() =>  Linking.openURL(item.url)}><Text style={styles.url} >{item.url}</Text></TouchableOpacity>
                 <Text style={styles.contentStyle}>{item.content}</Text>
             </ScrollView>
-            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle} onPress={() => {addFavList(item)}}>
-                <Ionicons name='heart-outline' size={35} />
+            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle} onPress={() => {favList.includes(item) ? deleteFavList(item, toast) : addFavList(item, toast)}}>
+                <Ionicons name={name} size={35} />
             </TouchableOpacity>
         </View>
     );

@@ -45,7 +45,7 @@ const CategorieScreen = ({ navigation }) => {
 
     return(
         <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
-            { resultBusiness.length>0&&loaded ? 
+            { resultBusiness.length>0 ? 
             <View styles={styles.viewStyle}>
                 <Text style={styles.titleStyle} >Business <Ionicons name="ios-bar-chart-outline" size={24} /></Text>
                 <FlatList 
@@ -61,9 +61,9 @@ const CategorieScreen = ({ navigation }) => {
                         )
                     }}
                     /> 
-            </View>: <Image source={require('../../assets/loading.gif')} style={styles.imageLoading} />}
+            </View>: null}
 
-            {resultHealth.length>0&&loaded ? 
+            {resultHealth.length>0 ? 
             <View styles={styles.viewStyle}>
                 <Text style={styles.titleStyle} >Health <Ionicons name="ios-bandage-outline" size={25} /></Text>
                 <FlatList 
@@ -81,7 +81,7 @@ const CategorieScreen = ({ navigation }) => {
                     /> 
             </View>: null}
 
-            {resultScience.length>0&&loaded ? 
+            {resultScience.length>0 ? 
             <View styles={styles.viewStyle}>
                 <Text style={styles.titleStyle} >Science <Ionicons name="ios-flask-outline" size={25} /></Text>
                 <FlatList 
@@ -99,7 +99,7 @@ const CategorieScreen = ({ navigation }) => {
                     /> 
             </View>: null}
 
-            {resultEntretainment.length>0&&loaded ? 
+            {resultEntretainment.length>0 ? 
             <View styles={styles.viewStyle}>
                 <Text style={styles.titleStyle} >Entertainment <Ionicons name="ios-flame-outline" size={27} /></Text>
                 <FlatList 
@@ -117,7 +117,7 @@ const CategorieScreen = ({ navigation }) => {
                     /> 
                 </View>: null}
             
-            {resultSports.length>0&&loaded ? 
+            {resultSports.length>0 ? 
             <View styles={styles.viewStyle}>
                 <Text style={styles.titleStyle} >Sports <Ionicons name="ios-football" size={25} /></Text>
                 <FlatList 
@@ -151,7 +151,7 @@ const CategorieScreen = ({ navigation }) => {
                         )
                     }}
                     /> 
-            </View>: null}      
+            </View>: <Image source={require('../../assets/loading.gif')} style={styles.imageLoading} />}      
         </ScrollView>
     )
 }
