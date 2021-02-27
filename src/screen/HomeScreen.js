@@ -13,11 +13,14 @@ const HomeScreen = ({ navigation }) => {
     const [results, setResults] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
+
+
     const searchApi = async () => {
         try{
             const response = await newsApi.get('./top-headlines?apiKey=9ad9ee5b59854fdcac03e4564bb937e2&country=us')
             setResults(response.data.articles);
-            setLoaded(true)
+
+            setLoaded(true)     
         } catch( err ) {
             console.log(err)
         }
@@ -36,11 +39,12 @@ const HomeScreen = ({ navigation }) => {
 
     useEffect(
         () => {
-            searchApi()
+            searchApi();
         },[])
 
+  
     return(
-        <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
             <SearchBar term={term} onChangeTerm={(term) => setTerm(term)} onEndEditing={(term) => searchApiWithTerm(term)}/>
             {loaded  ? 
                 <FlatList 
@@ -57,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
 
             : <Image source={require('../../assets/loading.gif')} style={styles.imageLoading} />}
         </SafeAreaView>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
