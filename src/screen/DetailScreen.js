@@ -38,7 +38,13 @@ const DetailScreen = ({ route: { params } }) => {
                 <TouchableOpacity onPress={() =>  Linking.openURL(item.url)}><Text style={styles.url} >{item.url}</Text></TouchableOpacity>
                 <Text style={styles.contentStyle}>{item.content}</Text>
             </ScrollView>
-            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle} onPress={() => {favList.includes(item) ? deleteFavList(item, toast) : addFavList(item, toast)}}>
+            <TouchableOpacity activeOpacity={0.6} style={styles.floatingStyle} onPress={() => 
+                {favList.includes(item) ? {
+                    deleteFavList(item, toast); 
+                }
+                : {
+                    addFavList(item, toast);
+                }}}>
                 <Ionicons name={name} size={35} />
             </TouchableOpacity>
         </View>
